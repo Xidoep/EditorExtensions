@@ -2,6 +2,7 @@
     "name": "XS.UI_Extensions",
     "rootNamespace": "",
     "references": [
+        "GUID:88e2bc408dbc56846b41339724e04471",
         "GUID:e9d3cf9d156ccee4eb38af5c53f0ef62"
     ],
     "includePlatforms": [],
