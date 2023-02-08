@@ -1,0 +1,16 @@
+{
+    "name": "XS.UI_Extensions",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e9d3cf9d156ccee4eb38af5c53f0ef62"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
