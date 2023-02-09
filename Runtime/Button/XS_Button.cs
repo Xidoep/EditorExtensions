@@ -13,25 +13,65 @@ public class XS_Button : Button
     public UnityEvent onEnter;
     public UnityEvent onExit;
 
+    Image image;
+    Coroutine coroutineLoop;
+    WaitForSeconds waitForSeconds;
+
+
     public void Interactable(bool interactable) => this.interactable = interactable;
 
-    protected override void OnValidate()
+    
+
+    protected override void OnEnable()
     {
-        //onClick.RemoveListener(animacio.PlayOnClick);
-        //onClick.AddListener(animacio.PlayOnClick);
+        image = GetComponent<Image>();
+
+        if(animacio != null)
+            waitForSeconds = new WaitForSeconds(animacio.OnEnter.Temps);
+
+        onClick.AddListener(PlayOnClick);
+
+        base.OnEnable();
+    }
+    protected override void OnDisable()
+    {
+        onClick.RemoveAllListeners();
+        base.OnDisable();
     }
 
+    void PlayOnClick() 
+    {
+        StopLoop();
+        animacio.PlayOnClick(image);
+    } 
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        //onEnter.Invoke();
-        animacio.PlayOnEnter();
+        onEnter.Invoke();
+        animacio.PlayOnEnter(image);
+        coroutineLoop = StartCoroutine(StartLoop());
     }
+    
+
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
-        //onExit.Invoke();
-        animacio.PlayOnExit();
+        onExit.Invoke();
+        StopLoop();
+        animacio.PlayOnExit(image);
     }
 
+    IEnumerator StartLoop()
+    {
+        yield return waitForSeconds;
+        animacio.PlayLoop(image);
+    }
+    void StopLoop()
+    {
+        if (coroutineLoop != null)
+        {
+            StopCoroutine(coroutineLoop);
+            coroutineLoop = null;
+        }
+    }
 }

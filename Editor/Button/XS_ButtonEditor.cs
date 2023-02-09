@@ -26,7 +26,7 @@ public class XS_ButtonEditor : ButtonEditor
     {
         base.OnInspectorGUI();
 
-        XS_Button button = (XS_Button)target;
+        //XS_Button button = (XS_Button)target;
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
         EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
