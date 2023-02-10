@@ -13,9 +13,8 @@ public class XS_Button : Button
     public UnityEvent onEnter;
     public UnityEvent onExit;
 
-    Image image;
+    //Image image;
     Coroutine coroutineLoop;
-    WaitForSeconds waitForSeconds;
 
 
     public void Interactable(bool interactable) => this.interactable = interactable;
@@ -24,10 +23,13 @@ public class XS_Button : Button
 
     protected override void OnEnable()
     {
-        image = GetComponent<Image>();
+        //image = GetComponent<Image>();
 
-        if(animacio != null)
-            waitForSeconds = new WaitForSeconds(animacio.OnEnter.Temps);
+        /*if(animacio != null)
+        {
+            wfsEnter = new WaitForSeconds(animacio.OnEnter.Temps);
+            wfsClick = new WaitForSeconds(animacio.OnClick.Temps);
+        }*/
 
         onClick.AddListener(PlayOnClick);
 
@@ -41,15 +43,16 @@ public class XS_Button : Button
 
     void PlayOnClick() 
     {
-        StopLoop();
-        animacio.PlayOnClick(image);
+        //StopLoop();
+        animacio.PlayOnClick(image, ref coroutineLoop);
+        //coroutineLoop = StartCoroutine(StartLoop(wfsClick));
     } 
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
         onEnter.Invoke();
-        animacio.PlayOnEnter(image);
-        coroutineLoop = StartCoroutine(StartLoop());
+        animacio.PlayOnEnter(image, ref coroutineLoop);
+        //coroutineLoop = StartCoroutine(StartLoop(wfsEnter));
     }
     
 
@@ -57,11 +60,11 @@ public class XS_Button : Button
     {
         base.OnPointerExit(eventData);
         onExit.Invoke();
-        StopLoop();
-        animacio.PlayOnExit(image);
+        //StopLoop();
+        animacio.PlayOnExit(image, ref coroutineLoop);
     }
 
-    IEnumerator StartLoop()
+    /*IEnumerator StartLoop(WaitForSeconds waitForSeconds)
     {
         yield return waitForSeconds;
         animacio.PlayLoop(image);
@@ -73,5 +76,5 @@ public class XS_Button : Button
             StopCoroutine(coroutineLoop);
             coroutineLoop = null;
         }
-    }
+    }*/
 }
