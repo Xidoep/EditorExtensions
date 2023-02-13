@@ -9,30 +9,23 @@ using XS_Utils;
 
 public class XS_Button : Button
 {
-    public AnimacioPerCodi_Boto animacio;
-    public UnityEvent onEnter;
-    public UnityEvent onExit;
+    [SerializeField] AnimacioPerCodi_Boto animacio;
+    [SerializeField] UnityEvent onEnter;
+    [SerializeField] UnityEvent onExit;
+    [SerializeField] new Image image;
 
-    //Image image;
     Coroutine coroutineLoop;
 
+    public UnityEvent OnEnter => onEnter;
+    public UnityEvent OnExit => onExit;
 
     public void Interactable(bool interactable) => this.interactable = interactable;
 
     
-
+    
     protected override void OnEnable()
     {
-        //image = GetComponent<Image>();
-
-        /*if(animacio != null)
-        {
-            wfsEnter = new WaitForSeconds(animacio.OnEnter.Temps);
-            wfsClick = new WaitForSeconds(animacio.OnClick.Temps);
-        }*/
-
         onClick.AddListener(PlayOnClick);
-
         base.OnEnable();
     }
     protected override void OnDisable()
@@ -43,38 +36,33 @@ public class XS_Button : Button
 
     void PlayOnClick() 
     {
-        //StopLoop();
+        if (!animacio)
+            return;
+
         animacio.PlayOnClick(image, ref coroutineLoop);
-        //coroutineLoop = StartCoroutine(StartLoop(wfsClick));
     } 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        base.OnPointerEnter(eventData);
+        if (!animacio)
+            return;
+
         onEnter.Invoke();
         animacio.PlayOnEnter(image, ref coroutineLoop);
-        //coroutineLoop = StartCoroutine(StartLoop(wfsEnter));
     }
     
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        base.OnPointerExit(eventData);
+        if (!animacio)
+            return;
+
         onExit.Invoke();
-        //StopLoop();
         animacio.PlayOnExit(image, ref coroutineLoop);
     }
 
-    /*IEnumerator StartLoop(WaitForSeconds waitForSeconds)
+    private void Update()
     {
-        yield return waitForSeconds;
-        animacio.PlayLoop(image);
+        if (XS_Input.OnPress(UnityEngine.InputSystem.Key.A)) animacio.PlayOnEnter(image, ref coroutineLoop);
+        if (XS_Input.OnPress(UnityEngine.InputSystem.Key.S)) animacio.onEnter.Play(image);
     }
-    void StopLoop()
-    {
-        if (coroutineLoop != null)
-        {
-            StopCoroutine(coroutineLoop);
-            coroutineLoop = null;
-        }
-    }*/
 }

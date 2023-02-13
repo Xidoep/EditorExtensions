@@ -15,21 +15,33 @@ public class XS_Text : TextMeshProUGUI
     protected override void OnEnable()
     {
         text = GetComponent<TMP_Text>();
-        button.onEnter.AddListener(PlayOnEnter);
-        button.onExit.AddListener(PlayOnExit);
+        button.OnEnter.AddListener(PlayOnEnter);
+        button.OnExit.AddListener(PlayOnExit);
         base.OnEnable();
     }
 
 
     protected override void OnDisable()
     {
-        button.onEnter.RemoveListener(PlayOnEnter);
-        button.onExit.RemoveListener(PlayOnExit);
+        button.OnEnter.RemoveListener(PlayOnEnter);
+        button.OnExit.RemoveListener(PlayOnExit);
         base.OnDisable();
     }
 
-    public void PlayOnEnter() => animacio.PlayOnEnter(text);
-    public void PlayOnExit() => animacio.PlayOnExit(text);
+    public void PlayOnEnter() 
+    {
+        if (!animacio)
+            return;
+
+        animacio.PlayOnEnter(text);
+    }
+    public void PlayOnExit() 
+    {
+        if (!animacio)
+            return;
+
+        animacio.PlayOnExit(text);
+    } 
 
 
 }
