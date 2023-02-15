@@ -12,7 +12,7 @@ public class XS_Button : Button
     [SerializeField] AnimacioPerCodi_Boto animacio;
     [SerializeField] UnityEvent onEnter;
     [SerializeField] UnityEvent onExit;
-    [SerializeField] new Image image;
+    //[SerializeField] new Image image;
 
     Coroutine coroutineLoop;
 

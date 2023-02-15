@@ -13,14 +13,14 @@ public class XS_ButtonEditor : ButtonEditor
     SerializedProperty animacio;
     SerializedProperty onEnter;
     SerializedProperty onExit;
-    SerializedProperty image;
+    //SerializedProperty image;
 
     private new void OnEnable()
     {
         animacio = serializedObject.FindProperty("animacio");
         onEnter = serializedObject.FindProperty("onEnter");
         onExit = serializedObject.FindProperty("onExit");
-        image = serializedObject.FindProperty("image");
+        //image = serializedObject.FindProperty("image");
         base.OnEnable();
     }
 
@@ -33,7 +33,7 @@ public class XS_ButtonEditor : ButtonEditor
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
         EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
         EditorGUILayout.PropertyField(onExit, new GUIContent("On Exit"));
-        EditorGUILayout.PropertyField(image, new GUIContent("Image"));
+        //EditorGUILayout.PropertyField(image, new GUIContent("Image"));
 
         serializedObject.ApplyModifiedProperties();
     }
