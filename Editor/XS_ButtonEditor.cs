@@ -13,7 +13,8 @@ public class XS_ButtonEditor : ButtonEditor
     SerializedProperty animacio;
     SerializedProperty onEnter;
     SerializedProperty onExit;
-    //SerializedProperty image;
+
+    Button t;
 
     private new void OnEnable()
     {
@@ -29,6 +30,9 @@ public class XS_ButtonEditor : ButtonEditor
         base.OnInspectorGUI();
 
         //XS_Button button = (XS_Button)target;
+
+        t = (Button)target;
+        if (t.transition != Selectable.Transition.None) t.transition = Selectable.Transition.None;
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
         EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
