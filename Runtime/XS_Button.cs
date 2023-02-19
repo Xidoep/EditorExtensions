@@ -60,9 +60,9 @@ public class XS_Button : Button
         animacio.PlayOnExit(image, ref coroutineLoop);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (XS_Input.OnPress(UnityEngine.InputSystem.Key.A)) animacio.PlayOnEnter(image, ref coroutineLoop);
         if (XS_Input.OnPress(UnityEngine.InputSystem.Key.S)) animacio.onEnter.Play(image);
-    }
+    }*/
 }
