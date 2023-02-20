@@ -21,7 +21,6 @@ public class XS_ButtonEditor : ButtonEditor
         animacio = serializedObject.FindProperty("animacio");
         onEnter = serializedObject.FindProperty("onEnter");
         onExit = serializedObject.FindProperty("onExit");
-        //image = serializedObject.FindProperty("image");
         base.OnEnable();
     }
 
@@ -29,15 +28,12 @@ public class XS_ButtonEditor : ButtonEditor
     {
         base.OnInspectorGUI();
 
-        //XS_Button button = (XS_Button)target;
-
         t = (Button)target;
         if (t.transition != Selectable.Transition.None) t.transition = Selectable.Transition.None;
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
         EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
         EditorGUILayout.PropertyField(onExit, new GUIContent("On Exit"));
-        //EditorGUILayout.PropertyField(image, new GUIContent("Image"));
 
         serializedObject.ApplyModifiedProperties();
     }
