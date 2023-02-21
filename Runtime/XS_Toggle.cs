@@ -7,40 +7,41 @@ using UnityEngine.UI;
 public class XS_Toggle : Toggle
 {
     [SerializeField] AnimacioPerCodi_Toggle animacio;
-
     [SerializeField] Image recuadre;
+    Coroutine corrutine;
+
     public Image Recuadre { get => recuadre; set => recuadre = value; }
 
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        animacio?.onEnter?.Play(recuadre);
+        corrutine = animacio?.OnEnter(recuadre);
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        animacio?.onEnter?.Play(recuadre);
+        corrutine = animacio?.OnEnter(recuadre);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
-        animacio?.onClick?.Play((Image)graphic);
+        corrutine = animacio?.OnClick((Image)graphic, corrutine);
     }
     public override void OnSubmit(BaseEventData eventData)
     {
         base.OnSubmit(eventData);
-        animacio?.onClick?.Play((Image)graphic);
+        corrutine = animacio?.OnClick((Image)graphic, corrutine);
     }
 
     public override void OnDeselect(BaseEventData eventData)
     {
         base.OnDeselect(eventData);
-        animacio?.onExit?.Play(recuadre);
+        corrutine = animacio?.OnExit(recuadre, corrutine);
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
-        animacio?.onExit?.Play(recuadre);
+        corrutine = animacio?.OnExit(recuadre, corrutine);
     }
 }

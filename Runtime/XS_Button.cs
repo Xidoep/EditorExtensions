@@ -25,34 +25,34 @@ public class XS_Button : Button
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        animacio?.PlayOnEnter(image, ref coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnEnter(image);
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        animacio?.PlayOnEnter(image, ref coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnEnter(image);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
-        animacio?.PlayOnClick(image, ref coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnClick(image, coroutineLoop);
     }
     public override void OnSubmit(BaseEventData eventData)
     {
         base.OnSubmit(eventData);
-        animacio?.PlayOnClick(image, ref coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnClick(image, coroutineLoop);
     }
 
     public override void OnDeselect(BaseEventData eventData)
     {
         base.OnDeselect(eventData);
-        animacio?.PlayOnExit(image, ref coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnExit(image, coroutineLoop);
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
-        animacio?.PlayOnExit(image, ref coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnExit(image, coroutineLoop);
     }
 
 }

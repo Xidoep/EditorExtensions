@@ -15,6 +15,7 @@ public class XS_Slider : Slider
     [SerializeField] float perDefecte;
 
     SoControlador controlador;
+    Coroutine coroutine;
 
     public void Interactable(bool interactable) => this.interactable = interactable;
 
@@ -41,18 +42,18 @@ public class XS_Slider : Slider
         So(false);
         onValueChanged.Invoke(this.value);
 
-        animacio?.PlayModificar(image);
+        if (animacio) animacio.Modificar(image);
     }
 
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        animacio?.PlayOnEnter(image);
+        if (animacio) coroutine = animacio.OnEnter(image);
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        animacio?.PlayOnEnter(image);
+        if (animacio) coroutine = animacio.OnEnter(image);
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -64,24 +65,24 @@ public class XS_Slider : Slider
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        animacio?.PlayOnDown(image);
+        if (animacio) coroutine = animacio.OnDown(image, coroutine);
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);
-        animacio?.PlayOnUp(image);
+        if (animacio) coroutine = animacio.OnUp(image);
         Guardar();
     }
 
     public override void OnDeselect(BaseEventData eventData)
     {
         base.OnDeselect(eventData);
-        animacio.PlayOnExit(image);
+        if (animacio) coroutine = animacio.OnExit(image, coroutine);
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
-        animacio.PlayOnExit(image);
+        if (animacio) coroutine = animacio.OnExit(image, coroutine);
         Guardar();
     }
     void So(bool limitarRepeticions)
