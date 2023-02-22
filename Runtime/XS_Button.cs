@@ -10,13 +10,14 @@ using XS_Utils;
 public class XS_Button : Button
 {
     [SerializeField] AnimacioPerCodi_Boto animacio;
-    [SerializeField] UnityEvent onEnter;
-    [SerializeField] UnityEvent onExit;
+    [SerializeField] System.Action onEnter;
+    [SerializeField] System.Action onExit;
 
     Coroutine coroutineLoop;
 
-    public UnityEvent OnEnter => onEnter;
-    public UnityEvent OnExit => onExit;
+    public System.Action OnEnter { get => onEnter; set => onEnter = value; }
+    public System.Action OnExit { get => onExit; set => onExit = value; }
+
 
     public void Interactable(bool interactable) => this.interactable = interactable;
 
@@ -26,11 +27,13 @@ public class XS_Button : Button
     {
         base.OnSelect(eventData);
         if (animacio) coroutineLoop = animacio.OnEnter(image);
+        onEnter?.Invoke();
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
         if (animacio) coroutineLoop = animacio.OnEnter(image);
+        onEnter?.Invoke();
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -48,11 +51,13 @@ public class XS_Button : Button
     {
         base.OnDeselect(eventData);
         if (animacio) coroutineLoop = animacio.OnExit(image, coroutineLoop);
+        onExit?.Invoke();
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
         if (animacio) coroutineLoop = animacio.OnExit(image, coroutineLoop);
+        onExit?.Invoke();
     }
 
 }

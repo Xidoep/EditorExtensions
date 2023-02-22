@@ -11,16 +11,16 @@ using UnityEditor.UI;
 public class XS_ButtonEditor : ButtonEditor
 {
     SerializedProperty animacio;
-    SerializedProperty onEnter;
-    SerializedProperty onExit;
+    //SerializedProperty onEnter;
+    //SerializedProperty onExit;
 
     Button t;
 
     private new void OnEnable()
     {
         animacio = serializedObject.FindProperty("animacio");
-        onEnter = serializedObject.FindProperty("onEnter");
-        onExit = serializedObject.FindProperty("onExit");
+        //onEnter = serializedObject.FindProperty("onEnter");
+        //onExit = serializedObject.FindProperty("onExit");
         base.OnEnable();
     }
 
@@ -32,8 +32,8 @@ public class XS_ButtonEditor : ButtonEditor
         if (t.transition != Selectable.Transition.None) t.transition = Selectable.Transition.None;
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
-        EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
-        EditorGUILayout.PropertyField(onExit, new GUIContent("On Exit"));
+        //EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
+        //EditorGUILayout.PropertyField(onExit, new GUIContent("On Exit"));
 
         serializedObject.ApplyModifiedProperties();
     }

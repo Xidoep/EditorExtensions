@@ -20,8 +20,8 @@ public class XS_Text : TextMeshProUGUI
 
         if (button)
         {
-            button.OnEnter.AddListener(PlayOnEnter);
-            button.OnExit.AddListener(PlayOnExit);
+            button.OnEnter += PlayOnEnter;
+            button.OnExit += PlayOnExit;
         }
         if (slider)
         {
@@ -57,8 +57,8 @@ public class XS_Text : TextMeshProUGUI
     {
         if (button)
         {
-            button.OnEnter.RemoveListener(PlayOnEnter);
-            button.OnExit.RemoveListener(PlayOnExit);
+            button.OnEnter -= PlayOnEnter;
+            button.OnExit -= PlayOnExit;
         }
         if (slider)
         {
