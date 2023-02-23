@@ -29,7 +29,7 @@ public class XS_ToggleEditor : ToggleEditor
         {
             foreach (var item in t.GetComponentsInChildren<Image>())
             {
-                if (item.name == "Background")
+                if (item.name == "Background" || item.name == "Item Background")
                 {
                     t.Recuadre = item;
                     break;
@@ -40,7 +40,7 @@ public class XS_ToggleEditor : ToggleEditor
         {
             foreach (var item in t.GetComponentsInChildren<Image>())
             {
-                if(item.name == "Checkmark")
+                if(item.name == "Checkmark" || item.name == "Item Checkmark")
                 {
                     t.graphic = item;
                 }

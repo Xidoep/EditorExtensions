@@ -12,10 +12,7 @@ public class XS_SliderEditor : SliderEditor
     SerializedProperty animacio;
     SerializedProperty so;
 
-    SerializedProperty guardat;
-    SerializedProperty key;
-    SerializedProperty local;
-    SerializedProperty perDefecte;
+    SerializedProperty variable;
 
     Slider t;
 
@@ -23,11 +20,7 @@ public class XS_SliderEditor : SliderEditor
     {
         animacio = serializedObject.FindProperty("animacio");
         so = serializedObject.FindProperty("so");
-
-        guardat = serializedObject.FindProperty("guardat");
-        key = serializedObject.FindProperty("key");
-        local = serializedObject.FindProperty("local");
-        perDefecte = serializedObject.FindProperty("perDefecte");
+        variable = serializedObject.FindProperty("variable");
 
         base.OnEnable();
     }
@@ -86,11 +79,13 @@ public class XS_SliderEditor : SliderEditor
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
         EditorGUILayout.PropertyField(so, new GUIContent("So"));
         EditorGUILayout.Space(20);
-        EditorGUILayout.PropertyField(guardat, new GUIContent("Guardat"));
+        EditorGUILayout.PropertyField(variable, new GUIContent("Variable"));
+        EditorGUILayout.Space(20);
+        /*EditorGUILayout.PropertyField(guardat, new GUIContent("Guardat"));
         EditorGUILayout.PropertyField(key, new GUIContent("Key"));
         EditorGUILayout.PropertyField(local, new GUIContent("Local"));
         EditorGUILayout.PropertyField(perDefecte, new GUIContent("Valor per defecte"));
-
+        */
         serializedObject.ApplyModifiedProperties();
     }
 

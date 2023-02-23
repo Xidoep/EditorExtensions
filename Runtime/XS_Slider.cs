@@ -9,10 +9,11 @@ public class XS_Slider : Slider
     [SerializeField] AnimacioPerCodi_Slider animacio;
     [SerializeField] So so;
 
-    [SerializeField] Guardat guardat;
+    [SerializeField] SavableVariable<float> variable;
+    /*[SerializeField] Guardat guardat;
     [SerializeField] string key;
     [SerializeField] bool local;
-    [SerializeField] float perDefecte;
+    [SerializeField] float perDefecte;*/
 
     SoControlador controlador;
     Coroutine coroutine;
@@ -21,15 +22,15 @@ public class XS_Slider : Slider
 
     protected override void OnEnable()
     {
-        if (guardat != null) value = (float)guardat.Get(key, perDefecte);
-        else value = perDefecte;
+        //if (guardat != null) value = (float)guardat.Get(key, perDefecte);
+        //else value = perDefecte;
         base.OnEnable();
     }
 
 
     public void Modificar(float value) => SetValue(this.value + value);
     public void Minim() => SetValue(minValue);
-    public void ResetDefault() => SetValue(perDefecte);
+    public void ResetDefault() => SetValue((float)variable.PerDefecte);
     public void Mute(bool mute)
     {
         if (mute) Minim();
@@ -38,6 +39,7 @@ public class XS_Slider : Slider
     void SetValue(float value)
     {
         this.value = value;
+        variable.Valor = value;
         Guardar();
         So(false);
         onValueChanged.Invoke(this.value);
@@ -59,6 +61,7 @@ public class XS_Slider : Slider
     public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
+        variable.Valor = value;
         Guardar();
         So(true);
     }
@@ -71,6 +74,7 @@ public class XS_Slider : Slider
     {
         base.OnPointerUp(eventData);
         if (animacio) coroutine = animacio.OnUp(image);
+        variable.Valor = value;
         Guardar();
     }
 
@@ -83,6 +87,7 @@ public class XS_Slider : Slider
     {
         base.OnPointerExit(eventData);
         if (animacio) coroutine = animacio.OnExit(image, coroutine);
+        variable.Valor = value;
         Guardar();
     }
     void So(bool limitarRepeticions)
@@ -103,7 +108,7 @@ public class XS_Slider : Slider
 
     void Guardar()
     {
-        if (guardat != null) guardat.Set(key, value, local);
+        //if (guardat != null) guardat.Set(key, value, local);
     }
 
 }
