@@ -14,6 +14,21 @@ public class XS_Dropdown : TMP_Dropdown
 
     Coroutine corrutine;
 
+    protected override void OnEnable()
+    {
+        value = variable.Valor;
+        base.OnEnable();
+
+        onValueChanged.AddListener(Select);
+    }
+    void Select(int index) => Select();
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        onValueChanged.RemoveListener(Select);
+    }
+
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);

@@ -22,8 +22,7 @@ public class XS_Slider : Slider
 
     protected override void OnEnable()
     {
-        //if (guardat != null) value = (float)guardat.Get(key, perDefecte);
-        //else value = perDefecte;
+        value = variable.Valor;
         base.OnEnable();
     }
 
