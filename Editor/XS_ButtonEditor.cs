@@ -11,6 +11,7 @@ using UnityEditor.UI;
 public class XS_ButtonEditor : ButtonEditor
 {
     SerializedProperty animacio;
+    SerializedProperty component;
     //SerializedProperty onEnter;
     //SerializedProperty onExit;
 
@@ -19,6 +20,7 @@ public class XS_ButtonEditor : ButtonEditor
     private new void OnEnable()
     {
         animacio = serializedObject.FindProperty("animacio");
+        component = serializedObject.FindProperty("component");
         //onEnter = serializedObject.FindProperty("onEnter");
         //onExit = serializedObject.FindProperty("onExit");
         base.OnEnable();
@@ -32,6 +34,7 @@ public class XS_ButtonEditor : ButtonEditor
         if (t.transition != Selectable.Transition.None) t.transition = Selectable.Transition.None;
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
+        EditorGUILayout.PropertyField(component, new GUIContent("Per substituir Image", "Posa un component aqui si vols que sigui substituit per la imatge que fa servir de base."));
         //EditorGUILayout.PropertyField(onEnter, new GUIContent("On Enter"));
         //EditorGUILayout.PropertyField(onExit, new GUIContent("On Exit"));
 

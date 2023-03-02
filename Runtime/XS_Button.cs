@@ -9,6 +9,7 @@ using XS_Utils;
 
 public class XS_Button : Button
 {
+    [SerializeField] Component component;
     [SerializeField] AnimacioPerCodi_Boto animacio;
     [SerializeField] System.Action onEnter;
     [SerializeField] System.Action onExit;
@@ -21,42 +22,46 @@ public class XS_Button : Button
 
     public void Interactable(bool interactable) => this.interactable = interactable;
 
-
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        if (component == null) component = image;
+    }
 
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        if (animacio) coroutineLoop = animacio.OnEnter(image);
+        if (animacio) coroutineLoop = animacio.OnEnter(component);
         onEnter?.Invoke();
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        if (animacio) coroutineLoop = animacio.OnEnter(image);
+        if (animacio) coroutineLoop = animacio.OnEnter(component);
         onEnter?.Invoke();
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
-        if (animacio) coroutineLoop = animacio.OnClick(image, coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnClick(component, coroutineLoop);
     }
     public override void OnSubmit(BaseEventData eventData)
     {
         base.OnSubmit(eventData);
-        if (animacio) coroutineLoop = animacio.OnClick(image, coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnClick(component, coroutineLoop);
     }
 
     public override void OnDeselect(BaseEventData eventData)
     {
         base.OnDeselect(eventData);
-        if (animacio) coroutineLoop = animacio.OnExit(image, coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnExit(component, coroutineLoop);
         onExit?.Invoke();
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
-        if (animacio) coroutineLoop = animacio.OnExit(image, coroutineLoop);
+        if (animacio) coroutineLoop = animacio.OnExit(component, coroutineLoop);
         onExit?.Invoke();
     }
 
