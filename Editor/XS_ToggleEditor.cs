@@ -10,12 +10,14 @@ using UnityEditor.UI;
 public class XS_ToggleEditor : ToggleEditor
 {
     SerializedProperty animacio;
+    SerializedProperty recuadre;
 
     XS_Toggle t;
 
     private new void OnEnable()
     {
         animacio = serializedObject.FindProperty("animacio");
+        recuadre = serializedObject.FindProperty("recuadre");
         base.OnEnable();
     }
     public override void OnInspectorGUI()
@@ -48,6 +50,7 @@ public class XS_ToggleEditor : ToggleEditor
         }
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
+        EditorGUILayout.PropertyField(recuadre, new GUIContent("Recuadre"));
 
         serializedObject.ApplyModifiedProperties();
     }

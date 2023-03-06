@@ -10,22 +10,20 @@ public class ContentElement : MonoBehaviour
         this.seleccionar = seleccionar;
         this.index = index;
     }
-    /*public void Setup(System.Action<RectTransform> seleccionar)
-    {
-        this.seleccionarRect = seleccionar;
-    }*/
-
-    //[SerializeField] RectTransform rectTransform;
     [SerializeField] XS_Button[] botons;
+    [SerializeField] XS_Toggle[] toggles;
     [SerializeField] int index;
     System.Action<int> seleccionar;
-    //System.Action<RectTransform> seleccionarRect;
 
     private void OnEnable()
     {
         for (int i = 0; i < botons.Length; i++)
         {
             botons[i].OnEnter += Seleccionar;
+        }
+        for (int i = 0; i < toggles.Length; i++)
+        {
+            toggles[i].OnEnter += Seleccionar;
         }
     }
 
@@ -34,6 +32,10 @@ public class ContentElement : MonoBehaviour
         for (int i = 0; i < botons.Length; i++)
         {
             botons[i].OnEnter -= Seleccionar;
+        }
+        for (int i = 0; i < toggles.Length; i++)
+        {
+            toggles[i].OnEnter -= Seleccionar;
         }
     }
 
