@@ -29,7 +29,7 @@ public class XS_Slider : Slider
 
     public void Modificar(float value) => SetValue(this.value + value);
     public void Minim() => SetValue(minValue);
-    public void ResetDefault() => SetValue((float)variable.PerDefecte);
+    public void ResetDefault() => SetValue(variable.Reset());
     public void Mute(bool mute)
     {
         if (mute) Minim();
@@ -37,8 +37,8 @@ public class XS_Slider : Slider
     }
     void SetValue(float value)
     {
-        this.value = value;
-        variable.Valor = value;
+        this.value = Mathf.Clamp(value, minValue, maxValue);
+        variable.Valor = Mathf.Clamp(value, minValue, maxValue);
         Guardar();
         So(false);
         onValueChanged.Invoke(this.value);
