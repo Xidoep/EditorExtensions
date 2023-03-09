@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class XS_ScrollRect : ScrollRect
 {
     [SerializeField] GridLayoutGroup gridLayoutGroup;
-    [SerializeField] VerticalLayoutGroup layoutGroup;
+    [SerializeField] HorizontalOrVerticalLayoutGroup layoutGroup;
+    [SerializeField] ModeDesplaçament modeDesplaçament;
     [SerializeField] bool autoAssignarContingut = true;
     [SerializeField] List<Element> contingut;
 
@@ -16,6 +17,10 @@ public class XS_ScrollRect : ScrollRect
     [SerializeField] bool posicionar;
     [SerializeField] [Range(0, 35)] int indexSeleccionat;
     [SerializeField] Vector2 posicio;
+
+    public List<Element> Contingut => contingut;
+
+    public enum ModeDesplaçament { finsAVisible, finsACentrar }
 
 
     protected override void OnEnable()
@@ -69,7 +74,22 @@ public class XS_ScrollRect : ScrollRect
         Posicionar();
     }
 
-    void Posicionar() => posicionar = contingut[indexSeleccionat].Visible(horizontal, vertical);
+    void Posicionar() 
+    {
+        switch (modeDesplaçament)
+        {
+            case ModeDesplaçament.finsAVisible:
+                posicionar = contingut[indexSeleccionat].Visible(horizontal, vertical);
+                break;
+            case ModeDesplaçament.finsACentrar:
+                if (horizontal)
+                    posicionar = contingut[indexSeleccionat].FactorVisible.x != Mathf.Clamp(contingut[indexSeleccionat].FactorVisible.x, -0.1f, 0.1f);
+                if (vertical)
+                    posicionar = contingut[indexSeleccionat].FactorVisible.y != Mathf.Clamp(contingut[indexSeleccionat].FactorVisible.y, -0.1f, 0.1f);
+                break;
+        }
+       
+    } 
 
     void Seleccionar(int seleccionat)
     {
@@ -127,6 +147,8 @@ public class XS_ScrollRect : ScrollRect
 
         public bool Visible(bool horitzontal, bool vertical) => (horitzontal ? !visibleX : false) || (vertical ? !visibleY : false);
 
+        public RectTransform RectTransform => rectTransform;
         public Vector2 Factor => factor;
+        public Vector2 FactorVisible => factorVisible;
     }
 }
