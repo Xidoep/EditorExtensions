@@ -29,18 +29,14 @@ public class XS_ScrollRect : ScrollRect
         Iniciar();
     }
 
-    public void Iniciar() => StartCoroutine(IniciarTemps());
+
 
     public void SetContentSize(Vector2 size)
     {
         if (gridLayoutGroup) gridLayoutGroup.cellSize = size;
     }
-    public void Add(RectTransform rectTransform, int index)
-    {
-        contingut.Add(new Element(rectTransform, content.rect.size, content.anchoredPosition, viewport.rect.size, GetElementSize(rectTransform)));
-        rectTransform.GetComponent<ContentElement>()?.Setup(index, Seleccionar);
-    }
 
+    public void Iniciar() => StartCoroutine(IniciarTemps());
     IEnumerator IniciarTemps()
     {
         yield return new WaitForSecondsRealtime(0.5f);
@@ -56,6 +52,26 @@ public class XS_ScrollRect : ScrollRect
 
         preparat = true;
     }
+    void Add(RectTransform rectTransform, int index)
+    {
+        contingut.Add(new Element(rectTransform, content.rect.size, content.anchoredPosition, viewport.rect.size, GetElementSize(rectTransform)));
+        rectTransform.GetComponent<ContentElement>()?.Setup(index, Seleccionar, RemoveElement);
+    }
+    void RemoveElement(RectTransform rectTransform) 
+    {
+        for (int i = 0; i < contingut.Count; i++)
+        {
+            if (contingut[i].RectTransform.Equals(rectTransform))
+            {
+                contingut.RemoveAt(i);
+                break;
+            }
+        }
+    } 
+
+
+
+
 
     Vector2 GetElementSize(RectTransform rectTransform)
     {
@@ -97,9 +113,13 @@ public class XS_ScrollRect : ScrollRect
         Posicionar();
     }
 
+
+
+
+
     protected override void LateUpdate()
     {
-        if (!preparat)
+        if (!preparat || contingut.Count == 0)
             return;
 
         if (posicionar)
@@ -113,6 +133,11 @@ public class XS_ScrollRect : ScrollRect
 
         base.LateUpdate();
     }
+
+
+
+
+
 
 
 

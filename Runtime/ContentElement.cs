@@ -5,15 +5,19 @@ using UnityEngine.UI;
 
 public class ContentElement : MonoBehaviour
 {
-    public void Setup(int index, System.Action<int> seleccionar)
+    public void Setup(int index, System.Action<int> seleccionar, System.Action<RectTransform> onDestroy)
     {
-        this.seleccionar = seleccionar;
         this.index = index;
+        this.seleccionar = seleccionar;
+        this.onDestroy = onDestroy;
     }
+    [SerializeField] RectTransform rectTransform;
     [SerializeField] XS_Button[] botons;
     [SerializeField] XS_Toggle[] toggles;
+
     [SerializeField] int index;
     System.Action<int> seleccionar;
+    System.Action<RectTransform> onDestroy;
 
     private void OnEnable()
     {
@@ -39,6 +43,11 @@ public class ContentElement : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        onDestroy.Invoke(rectTransform);
+    }
+
     void Seleccionar()
     {
         seleccionar?.Invoke(index);
@@ -47,6 +56,6 @@ public class ContentElement : MonoBehaviour
 
     private void OnValidate()
     {
-       // if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
+       if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
     }
 }

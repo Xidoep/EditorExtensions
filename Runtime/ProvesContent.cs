@@ -60,7 +60,7 @@ public class ProvesContent : MonoBehaviour
         }
         Debug.Log(content.rect.size);
         contingut.Add(new Element(element.GetComponent<RectTransform>(), content.rect.size, content.anchoredPosition, view.rect.size, gridLayoutGroup.cellSize));
-        element.GetComponent<ContentElement>().Setup(contingut.Count - 1, Seleccionar);
+        element.GetComponent<ContentElement>().Setup(contingut.Count - 1, Seleccionar, null);
 
         //ActualitzarVisibles();
     }
@@ -88,7 +88,7 @@ public class ProvesContent : MonoBehaviour
         {
             contingut.Add(new Element((RectTransform)content.GetChild(i), content.rect.size, content.anchoredPosition, view.rect.size, gridLayoutGroup.cellSize));
 
-            content.GetChild(i).GetComponent<ContentElement>().Setup(i, Seleccionar);
+            content.GetChild(i).GetComponent<ContentElement>().Setup(i, Seleccionar, null);
         }
 
 
@@ -129,7 +129,7 @@ public class ProvesContent : MonoBehaviour
         {
             contingut.Add(new Element((RectTransform)content.GetChild(i), content.rect.size, content.anchoredPosition, view.rect.size, gridLayoutGroup.cellSize));
 
-            content.GetChild(i).GetComponent<ContentElement>().Setup(i, Seleccionar);
+            content.GetChild(i).GetComponent<ContentElement>().Setup(i, Seleccionar, null);
         }
 
 
