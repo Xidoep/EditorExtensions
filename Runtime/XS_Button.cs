@@ -15,10 +15,10 @@ public class XS_Button : Button
     [SerializeField] System.Action onExit;
 
     Coroutine coroutineLoop;
+    bool destroyingOrdisabling;
 
     public System.Action OnEnter { get => onEnter; set => onEnter = value; }
     public System.Action OnExit { get => onExit; set => onExit = value; }
-
 
     public void Interactable(bool interactable) => this.interactable = interactable;
 
@@ -26,7 +26,10 @@ public class XS_Button : Button
     {
         base.OnEnable();
         if (component == null) component = image;
+
+        if (animacio) animacio.EnEnable(component);
     }
+
 
     public override void OnSelect(BaseEventData eventData)
     {
@@ -64,5 +67,10 @@ public class XS_Button : Button
         if (animacio) coroutineLoop = animacio.OnExit(component, coroutineLoop);
         onExit?.Invoke();
     }
+
+
+    public void Destroy() => animacio.Destroy(component, coroutineLoop);
+    public void Disable() => animacio.Disable(component, true);
+
 
 }
