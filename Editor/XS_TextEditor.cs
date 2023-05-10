@@ -27,9 +27,9 @@ public class XS_TextEditor : TMPro.EditorUtilities.TMP_EditorPanelUI
 
        
         EditorGUILayout.PropertyField(animacio, new GUIContent("animacio"));
-        EditorGUILayout.PropertyField(button, new GUIContent("button"));
-        EditorGUILayout.PropertyField(slider, new GUIContent("Slider"));
-        EditorGUILayout.PropertyField(percentatge, new GUIContent("%"));
+        EditorGUILayout.PropertyField(button, new GUIContent("button", "Si les animacions del texte ha d'estar controlades per un botó, aquí es posa. Compte que només controla les animacions: OnEnter i OnExit"));
+        EditorGUILayout.PropertyField(slider, new GUIContent("Slider", "Si el texte serveix per mostrar el valor d'un Slider, aquest s'assigna aquí. No en controla les animacions, només el contingut del texte."));
+        EditorGUILayout.PropertyField(percentatge, new GUIContent("%", "Converteix el 'factor' donat per l'Slider controlador en un persentatge."));
 
         serializedObject.ApplyModifiedProperties();
     }
