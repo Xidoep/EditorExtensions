@@ -34,12 +34,18 @@ public class XS_Button : Button
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
+        if (!interactable)
+            return;
+
         if (animacio) coroutineLoop = animacio.OnEnter(component);
         onEnter?.Invoke();
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
+        if (!interactable)
+            return;
+
         if (animacio) coroutineLoop = animacio.OnEnter(component);
         onEnter?.Invoke();
     }
@@ -47,23 +53,35 @@ public class XS_Button : Button
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
+        if (!interactable)
+            return;
+
         if (animacio) coroutineLoop = animacio.OnClick(component, coroutineLoop);
     }
     public override void OnSubmit(BaseEventData eventData)
     {
         base.OnSubmit(eventData);
+        if (!interactable)
+            return;
+
         if (animacio) coroutineLoop = animacio.OnClick(component, coroutineLoop);
     }
 
     public override void OnDeselect(BaseEventData eventData)
     {
         base.OnDeselect(eventData);
+        if (!interactable)
+            return;
+
         if (animacio) coroutineLoop = animacio.OnExit(component, coroutineLoop);
         onExit?.Invoke();
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
+        if (!interactable)
+            return;
+
         if (animacio) coroutineLoop = animacio.OnExit(component, coroutineLoop);
         onExit?.Invoke();
     }
