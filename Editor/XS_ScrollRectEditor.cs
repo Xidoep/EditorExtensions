@@ -12,14 +12,19 @@ public class XS_ScrollRectEditor : ScrollRectEditor
 {
     SerializedProperty gridLayoutGroup;
     SerializedProperty layoutGroup;
+
+    SerializedProperty autoScroll;
     SerializedProperty modeDesplaçament;
 
     SerializedProperty contingut;
+
     XS_ScrollRect t;
     private new void OnEnable()
     {
         gridLayoutGroup = serializedObject.FindProperty("gridLayoutGroup");
         layoutGroup = serializedObject.FindProperty("layoutGroup");
+
+        autoScroll = serializedObject.FindProperty("autoScroll");
         modeDesplaçament = serializedObject.FindProperty("modeDesplaçament");
         contingut = serializedObject.FindProperty("contingut");
         base.OnEnable();
@@ -49,8 +54,9 @@ public class XS_ScrollRectEditor : ScrollRectEditor
 
         EditorGUILayout.PropertyField(gridLayoutGroup, new GUIContent("Grid Layout Group"));
         EditorGUILayout.PropertyField(layoutGroup, new GUIContent("Layout Group"));
-        EditorGUILayout.PropertyField(modeDesplaçament, new GUIContent("Mode Desplaçament"));
         EditorGUILayout.Space(20);
+        EditorGUILayout.PropertyField(autoScroll, new GUIContent("Auto-scroll"));
+        EditorGUILayout.PropertyField(modeDesplaçament, new GUIContent("Mode Desplaçament"));
         EditorGUILayout.PropertyField(contingut, new GUIContent("Contingut"));
 
         serializedObject.ApplyModifiedProperties();

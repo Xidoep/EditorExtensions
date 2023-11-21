@@ -38,8 +38,7 @@ public class XS_Slider : Slider
     void SetValue(float value)
     {
         this.value = Mathf.Clamp(value, minValue, maxValue);
-        variable.Valor = Mathf.Clamp(value, minValue, maxValue);
-        Guardar();
+        variable.Valor = this.value;
         So(false);
         onValueChanged.Invoke(this.value);
 
@@ -61,7 +60,6 @@ public class XS_Slider : Slider
     {
         base.OnDrag(eventData);
         variable.Valor = value;
-        Guardar();
         So(true);
     }
     public override void OnPointerDown(PointerEventData eventData)
@@ -74,7 +72,6 @@ public class XS_Slider : Slider
         base.OnPointerUp(eventData);
         if (animacio) coroutine = animacio.OnUp(image);
         variable.Valor = value;
-        Guardar();
     }
 
     public override void OnDeselect(BaseEventData eventData)
@@ -87,7 +84,6 @@ public class XS_Slider : Slider
         base.OnPointerExit(eventData);
         if (animacio) coroutine = animacio.OnExit(image, coroutine);
         variable.Valor = value;
-        Guardar();
     }
     void So(bool limitarRepeticions)
     {
@@ -105,9 +101,5 @@ public class XS_Slider : Slider
 
     float Pitch => 0.5f + (value - minValue) / (maxValue - minValue);
 
-    void Guardar()
-    {
-        //if (guardat != null) guardat.Set(key, value, local);
-    }
 
 }

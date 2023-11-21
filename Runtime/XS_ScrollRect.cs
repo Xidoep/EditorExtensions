@@ -10,6 +10,7 @@ public class XS_ScrollRect : ScrollRect
     [SerializeField] ModeDesplaçament modeDesplaçament;
     [SerializeField] bool autoAssignarContingut = true;
     [SerializeField] List<Element> contingut;
+    [SerializeField] bool autoScroll = true;
 
     //INTERN
     [SerializeField] bool preparat = false;
@@ -119,6 +120,9 @@ public class XS_ScrollRect : ScrollRect
 
     protected override void LateUpdate()
     {
+        if (!autoScroll)
+            return;
+
         if (!preparat || contingut.Count == 0)
             return;
 
@@ -134,7 +138,10 @@ public class XS_ScrollRect : ScrollRect
         base.LateUpdate();
     }
 
-
+    public void ActivarAutoScroll(bool activar)
+    {
+        autoScroll = activar;
+    }
 
 
 

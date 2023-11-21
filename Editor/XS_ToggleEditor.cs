@@ -12,12 +12,23 @@ public class XS_ToggleEditor : ToggleEditor
     SerializedProperty animacio;
     SerializedProperty recuadre;
 
+    SerializedProperty estat;
+    SerializedProperty True;
+    SerializedProperty False;
+    SerializedProperty desplaçamentLateral;
+    SerializedProperty variable;
+
     XS_Toggle t;
 
     private new void OnEnable()
     {
         animacio = serializedObject.FindProperty("animacio");
         recuadre = serializedObject.FindProperty("recuadre");
+        estat = serializedObject.FindProperty("estat");
+        True = serializedObject.FindProperty("True");
+        False = serializedObject.FindProperty("False");
+        desplaçamentLateral = serializedObject.FindProperty("desplaçamentLateral");
+        variable = serializedObject.FindProperty("variable");
         base.OnEnable();
     }
     public override void OnInspectorGUI()
@@ -51,6 +62,13 @@ public class XS_ToggleEditor : ToggleEditor
 
         EditorGUILayout.PropertyField(animacio, new GUIContent("Animacio"));
         EditorGUILayout.PropertyField(recuadre, new GUIContent("Recuadre"));
+        EditorGUILayout.Space(20);
+        EditorGUILayout.PropertyField(estat, new GUIContent("Estat"));
+        EditorGUILayout.PropertyField(True, new GUIContent("True"));
+        EditorGUILayout.PropertyField(False, new GUIContent("False"));
+        EditorGUILayout.PropertyField(desplaçamentLateral, new GUIContent("Desplaçament lateral"));
+        EditorGUILayout.Space(20);
+        EditorGUILayout.PropertyField(variable, new GUIContent("Variable"));
 
         serializedObject.ApplyModifiedProperties();
     }
