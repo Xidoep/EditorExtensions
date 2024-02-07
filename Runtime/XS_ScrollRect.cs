@@ -20,6 +20,7 @@ public class XS_ScrollRect : ScrollRect
     [SerializeField] Vector2 posicio;
 
     public List<Element> Contingut => contingut;
+    int ClampedIndexSeleccionat => Mathf.Clamp(indexSeleccionat, 0, contingut.Count - 1);
 
     public enum ModeDesplaçament { finsAVisible, finsACentrar }
 
@@ -96,13 +97,13 @@ public class XS_ScrollRect : ScrollRect
         switch (modeDesplaçament)
         {
             case ModeDesplaçament.finsAVisible:
-                posicionar = contingut[indexSeleccionat].Visible(horizontal, vertical);
+                posicionar = contingut[ClampedIndexSeleccionat].Visible(horizontal, vertical);
                 break;
             case ModeDesplaçament.finsACentrar:
                 if (horizontal)
-                    posicionar = contingut[indexSeleccionat].FactorVisible.x != Mathf.Clamp(contingut[indexSeleccionat].FactorVisible.x, -0.1f, 0.1f);
+                    posicionar = contingut[ClampedIndexSeleccionat].FactorVisible.x != Mathf.Clamp(contingut[ClampedIndexSeleccionat].FactorVisible.x, -0.1f, 0.1f);
                 if (vertical)
-                    posicionar = contingut[indexSeleccionat].FactorVisible.y != Mathf.Clamp(contingut[indexSeleccionat].FactorVisible.y, -0.1f, 0.1f);
+                    posicionar = contingut[ClampedIndexSeleccionat].FactorVisible.y != Mathf.Clamp(contingut[ClampedIndexSeleccionat].FactorVisible.y, -0.1f, 0.1f);
                 break;
         }
        
